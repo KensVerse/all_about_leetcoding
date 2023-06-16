@@ -1,24 +1,38 @@
 collections.Counter(), collections.Counter(w for w in words if w not in ban).most_common(1)[0][0]
 collections.OrderDict() remembers the order of inserted keys; ordereddict.popitem(last=False) gives the first inserted key/value
+coll.get("c") # check availability within defaultdict without creating an instance
 del cnter1["s"] # delete item "s" from the dict
 pc = Counter(filter(lambda x : x.isalpha(), licensePlate.lower()))
 return min([w for w in words if Counter(w) & pc == pc], key=len)
 x.count(1), x.count("010") # count number of 1's
 set([1, 2, 3]).intersection(set([1, 2, 3, 4]))
-list(set().union(*d))
+list(set().union(*d)) # d can be a list of lists
 set([1, 2, 3, 4]) - set([1, 2, 3])
 set([1, 2, 3, 4]) > set([1, 2, 3]) # includes or not
-(Counter([1, 2, 3, 4, 5, 5]) - Counter([1, 2, 3])).elements()
-c = ["abc", "abcs"]
-collections.Counter(c[0]) & collections.Counter(c[1]) # common elements
+aset.add(1)
+aset.remove(1)
+list((Counter([1, 2, 3, 4, 5, 5]) - Counter([1, 2, 3])).elements())
+max([dfs(j) for j in children[i]] or [0]) # incase the first list is empty
+binary search: l = mid + 1, cannot let l=mid-> infinite loop if l + 1 = r and l=mid's condition is met
+
+ranges += [], # add a tuple containing a "[]" to the list
+ranges[-1][1:] = n, # assign a tuple containing n to the last item in ranges, if the last item is empty, it assignes to n to be its only value
 d = collections.deque([(1, 2, 3)]) # fast popleft(), as list's pop(0) is of N complexity due to the shifting of entire list
 deque usually applied to a list as argument
 collections.defaultdict(list)
-collections.defaultdict(lambda: 0)
+x = collections.defaultdict(lambda: 0)
+x.pop(certainkey)
+x[i, j] += 1
 dict1.update(dict2) # add s1 and replace s1 with s2
 "and" has higher priority than "or": try 0 and 0 or 1
 sorted(counts, key=counts.get, reverse=True)
 function within a function: res += xxx wouldn't work, using self.res += xxxx, as "res" is an iteger (reference before assignment error)
+
+x = [1]
+for i in x: # loop is extendable
+    print(i)
+    if i + 10 < 15:
+        x.append(i + 1)
 
 b = [1]
 for i in b:
@@ -29,9 +43,11 @@ for i in b:
             b.append(j) # append during a loop, iterate over the appended values
 
 for i, j, k in [[1, 2, 3], [3, 4, 5]]
+alist.extend(anotherlist_or_a_tuple)
 max(0.5 * abs((j[0] - i[0]) * (k[1] - i[1]) - (j[1] - i[1]) * (k[0] - i[0])) for i, j, k in itertools.combinations(points, 3))
 list(itertools.accumulate([1, 2, 3]))
 accumulate([0, 7, 19, 13], lambda a, b: b - a)
+pow(2, (r - l), mod) # faster than 2 ** x % mod
 
 def first(l, h, check): # pass lambda as an argument
     while l < h:
@@ -44,6 +60,7 @@ def first(l, h, check): # pass lambda as an argument
 top = first(0, x, lambda x: "1" in image[x])
 
 [[(ch, len(list(g)))] for ch, g in itertools.groupby("vtvkgn")]# groupby is an iterator, so it changes after every time it's called
+all(list comprehension) # might be evaluated simultaneous, not one after each other, if the first item's function changes subsequent values, all() doesn't take the changes into consideration
 ['yes' if v == 1 else 'no' if v == 2 else 'idle' for v in l]
 [[ab_dict[j] for j in i] for i in words] # list of list
 uniq = []
@@ -64,11 +81,12 @@ yes: [[0] * len(mat) for _ in range(len(mat))] # each list component changes ind
 
 data = iter(data.split()) # generator
 val = next(vals)
-random.choices(population, weights, k=1) # select an item based on probability
+random.choices(population, weights, k=1) # random.choices(nums) select an item based on probability
+idx = random.randint(0, len(nums) - 1)
 
 # area for parallelogram direction (2, 3) and (4, 1) is abs(2 * 1 - 3 * 4) cross product
 import functools
-def gcd(a, b): # greatest common numbers, or use math.gcd
+def gcd(a, b): # greatest common numbers, or use math.gcd; least common multiple use math.
     while b:
         a, b = b, a % b
     return a
@@ -91,6 +109,7 @@ X = ["a", "b", "c", "d", "e", "f", "g", "h", "i"]
 Y = [ 0,   1,   1,    0,   1,   2,   2,   0,   1]
 Z = [x for _,x in sorted(zip(Y,X))]
 x.sort(key=lambda x: x[1])
+x.reverse()
 max(part1, part2, key=len)
 
 heap = [] #heapq not necessarily gives a sorted list, but always pop the minimum number
@@ -103,7 +122,8 @@ or
 x = [1, 3, 2]
 heapq.heapify(x)
 heapq.heappop(x) # return the smallest elementa\
-
+heapq.heapreplace(heap, i) # pop the smallest and push the new one
+heappushpop(self.pq, nums[i]) # push an item and pop the smallest one
 
 def alien_compare(x, y):
     for i, j in zip(x, y):
@@ -139,7 +159,7 @@ x = [1, 2, 3]
 x.rindex(2) # the rightmost occurance's index
 x.remove(3) applies to set too # based on Value
 del x[-1] # based on index
-x.pop() or pop(0)
+x.pop() or pop(0), pop(3) #delete the 3rd element
 x.insert(0, -1)
 [1, 2, 3] == [1, 2, 4]
 try:
@@ -175,7 +195,7 @@ def isScramble(self, s1, s2):
 
 # loop using set and "seen"
 seen = set()
-res = float('inf')
+res = float('inf') # or inf
 for x1, y1 in points:
     for x2, y2 in seen:
         if (x1, y2) in seen and (x2, y1) in seen:
